@@ -169,7 +169,7 @@ export default function HotelManagementPage() {
 
             {/* Quick Stats */}
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Today's Stats</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Today&apos;s Stats</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
@@ -202,7 +202,7 @@ export default function HotelManagementPage() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-900">Revenue</p>
-                      <p className="text-xs text-gray-500">Today's total</p>
+                      <p className="text-xs text-gray-500">Today&apos;s total</p>
                     </div>
                   </div>
                   <span className="text-lg font-bold text-purple-600">Rp 12.45M</span>

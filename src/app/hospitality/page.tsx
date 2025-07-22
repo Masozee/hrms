@@ -148,7 +148,7 @@ export default function HospitalityServicesPage() {
 
             {/* Quick Stats */}
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Today's Stats</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Today&apos;s Stats</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
