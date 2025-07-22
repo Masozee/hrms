@@ -24,16 +24,8 @@ export default function NotificationsPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchNotifications();
-    }
-  }, [isAuthenticated, filter]);
+    fetchNotifications();
+  }, [filter]);
 
   const fetchNotifications = async () => {
     setIsLoading(true);
@@ -98,10 +90,6 @@ export default function NotificationsPage() {
       return 'Just now';
     }
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

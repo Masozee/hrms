@@ -19,16 +19,8 @@ export default function InvoicesPage() {
   const [showInvoiceModal, setShowInvoiceModal] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchInvoices();
-    }
-  }, [isAuthenticated]);
+    fetchInvoices();
+  }, []);
 
   const fetchInvoices = async () => {
     setIsLoading(true);
@@ -67,10 +59,6 @@ export default function InvoicesPage() {
     invoice.invoice_number.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (invoice.guest && invoice.guest.toString().includes(searchTerm))
   );
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

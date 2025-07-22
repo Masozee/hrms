@@ -44,17 +44,9 @@ export default function OrderManagement() {
   });
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchOrders();
-      fetchMenuItems();
-    }
-  }, [isAuthenticated]);
+    fetchOrders();
+    fetchMenuItems();
+  }, []);
 
   const fetchOrders = async () => {
     setIsLoading(true);
@@ -218,10 +210,6 @@ export default function OrderManagement() {
       default: return <Clock className="h-4 w-4" />;
     }
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

@@ -43,16 +43,8 @@ export default function ReservationsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchReservations();
-    }
-  }, [isAuthenticated, statusFilter]);
+    fetchReservations();
+  }, [statusFilter]);
 
   const fetchReservations = async () => {
     setIsLoading(true);
@@ -258,10 +250,6 @@ export default function ReservationsPage() {
     setShowForm(false);
     setEditingReservation(null);
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   const statusOptions = [
     { value: 'all', label: 'All Reservations' },

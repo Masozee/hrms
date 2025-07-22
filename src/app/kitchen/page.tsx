@@ -63,17 +63,9 @@ export default function KitchenDashboard() {
   const [apiStatus, setApiStatus] = useState<'checking' | 'online' | 'offline'>('checking');
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      checkApiStatus();
-      fetchOrders();
-    }
-  }, [isAuthenticated]);
+    checkApiStatus();
+    fetchOrders();
+  }, []);
 
   const checkApiStatus = async () => {
     setApiStatus('checking');
@@ -86,7 +78,7 @@ export default function KitchenDashboard() {
     let interval: NodeJS.Timeout;
     const hasActiveOrders = orders.some(order => ['pending', 'preparing'].includes(order.status));
     
-    if (autoRefresh && isAuthenticated && hasActiveOrders) {
+    if (autoRefresh && hasActiveOrders) {
       interval = setInterval(() => {
         fetchOrders();
         setCurrentTime(new Date());
@@ -95,7 +87,7 @@ export default function KitchenDashboard() {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [autoRefresh, isAuthenticated, orders]);
+  }, [autoRefresh, orders]);
 
   // Update current time every 30 seconds (less frequent to reduce re-renders)
   useEffect(() => {
@@ -404,10 +396,6 @@ export default function KitchenDashboard() {
   const averagePrepTime = orders.filter(order => 
     order.preparation_started_at && order.status === 'ready'
   ).length; // Simplified calculation
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 p-6">

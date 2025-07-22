@@ -26,17 +26,9 @@ export default function PaymentsPage() {
   });
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchPayments();
-      fetchUnpaidReservations();
-    }
-  }, [isAuthenticated]);
+    fetchPayments();
+    fetchUnpaidReservations();
+  }, []);
 
   const fetchPayments = async () => {
     setIsLoading(true);
@@ -118,10 +110,6 @@ export default function PaymentsPage() {
       default: return 'bg-gray-100 text-gray-800';
     }
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

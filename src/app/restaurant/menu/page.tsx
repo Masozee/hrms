@@ -48,16 +48,8 @@ export default function MenuManagement() {
   });
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchMenuItems();
-    }
-  }, [isAuthenticated]);
+    fetchMenuItems();
+  }, []);
 
   const fetchMenuItems = async () => {
     setIsLoading(true);
@@ -195,10 +187,6 @@ export default function MenuManagement() {
     });
     return itemsByCategory;
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

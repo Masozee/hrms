@@ -15,16 +15,8 @@ export default function HousekeepingPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchTasks();
-    }
-  }, [isAuthenticated, statusFilter]);
+    fetchTasks();
+  }, [statusFilter]);
 
   const fetchTasks = async () => {
     setIsLoading(true);
@@ -114,10 +106,6 @@ export default function HousekeepingPage() {
       alert('An error occurred while deleting the task. Please try again.');
     }
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   const getStatusColor = (status: string) => {
     switch (status) {

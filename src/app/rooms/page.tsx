@@ -25,16 +25,8 @@ export default function RoomsPage() {
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('cards');
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchRooms();
-    }
-  }, [isAuthenticated]);
+    fetchRooms();
+  }, []);
 
   useEffect(() => {
     filterRooms();
@@ -146,10 +138,6 @@ export default function RoomsPage() {
     setShowForm(false);
     setEditingRoom(null);
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   const statusOptions = [
     { value: 'all', label: 'All Statuses' },

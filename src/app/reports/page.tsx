@@ -19,17 +19,9 @@ export default function ReportsPage() {
   });
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchDashboardData();
-      fetchRoomStatusData();
-    }
-  }, [isAuthenticated, dateRange]);
+    fetchDashboardData();
+    fetchRoomStatusData();
+  }, [dateRange]);
 
   const fetchDashboardData = async () => {
     setIsLoading(true);
@@ -80,10 +72,6 @@ export default function ReportsPage() {
       default: return type;
     }
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

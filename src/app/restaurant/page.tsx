@@ -31,16 +31,8 @@ export default function RestaurantDashboard() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchDashboardData();
-    }
-  }, [isAuthenticated]);
+    fetchDashboardData();
+  }, []);
 
   const fetchDashboardData = async () => {
     setIsLoading(true);
@@ -83,10 +75,6 @@ export default function RestaurantDashboard() {
       setIsLoading(false);
     }
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   const menuItems = [
     {

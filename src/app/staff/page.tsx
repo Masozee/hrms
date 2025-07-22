@@ -30,16 +30,8 @@ export default function StaffPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchStaffData();
-    }
-  }, [isAuthenticated]);
+    fetchStaffData();
+  }, []);
 
   const fetchStaffData = async () => {
     setIsLoading(true);
@@ -65,9 +57,6 @@ export default function StaffPage() {
     member.department.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">

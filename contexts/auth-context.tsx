@@ -1,7 +1,6 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { authApi, ApiError } from '../lib/api';
 
 interface User {
   id: number;
@@ -37,117 +36,36 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const isAuthenticated = !!user;
-
-  // Check if user is already logged in on app start
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  const checkAuthStatus = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      
-      // Check if we have a token
-      const token = typeof window !== 'undefined' ? localStorage.getItem('api_token') : null;
-      
-      if (!token) {
-        setIsLoading(false);
-        return;
-      }
-
-      // For development tokens, use mock user data instead of API call
-      if (token.startsWith('dev-token-')) {
-        setUser({
-          id: 1,
-          username: 'admin',
-          email: 'admin@hotel.com',
-          first_name: 'Admin',
-          last_name: 'User',
-          role: 'admin',
-          department: 'Management'
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      // For real tokens, verify with backend
-      try {
-        const profile = await authApi.getProfile();
-        setUser(profile);
-      } catch (error) {
-        // If profile fetch fails, clear token
-        if (typeof window !== 'undefined') {
-          localStorage.removeItem('api_token');
-        }
-        throw error;
-      }
-    } catch (error) {
-      console.error('Auth check failed:', error);
-      // Clear invalid token
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('api_token');
-      }
-      setError(error instanceof ApiError ? error.message : 'Authentication failed');
-    } finally {
-      setIsLoading(false);
-    }
+  const defaultUser: User = {
+    id: 1,
+    username: 'guest',
+    email: 'guest@hotel.com',
+    first_name: 'Guest',
+    last_name: 'User',
+    role: 'guest',
+    department: 'N/A'
   };
 
-  const login = async (username: string, password: string) => {
-    try {
-      setIsLoading(true);
-      setError(null);
+  const [user, setUser] = useState<User | null>(defaultUser);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-      const response = await authApi.login(username, password);
-      
-      if (response.user) {
-        setUser(response.user);
-      } else {
-        // For development tokens, use mock user data
-        const token = typeof window !== 'undefined' ? localStorage.getItem('api_token') : null;
-        if (token && token.startsWith('dev-token-')) {
-          setUser({
-            id: 1,
-            username: 'admin',
-            email: 'admin@hotel.com',
-            first_name: 'Admin',
-            last_name: 'User',
-            role: 'admin',
-            department: 'Management'
-          });
-        } else {
-          // For real tokens, fetch profile separately
-          const profile = await authApi.getProfile();
-          setUser(profile);
-        }
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-      setError(error instanceof ApiError ? error.message : 'Login failed');
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
+  const isAuthenticated = true;
+
+  const login = async (username: string, password: string) => {
+    // Login is no longer necessary, but keeping the function signature
+    // to avoid breaking existing calls. It will effectively do nothing.
+    setUser(defaultUser);
+    setIsLoading(false);
+    setError(null);
   };
 
   const logout = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      
-      await authApi.logout();
-    } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      setUser(null);
-      setIsLoading(false);
-    }
+    // Logout is no longer necessary, but keeping the function signature
+    // to avoid breaking existing calls. It will effectively do nothing.
+    setUser(null);
+    setIsLoading(false);
+    setError(null);
   };
 
   const value: AuthContextType = {

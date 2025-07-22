@@ -15,12 +15,6 @@ export default function GroupBookingsPage() {
   const [showForm, setShowForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
   const fetchGroupBookings = async () => {
     setIsLoading(true);
     try {
@@ -58,10 +52,8 @@ export default function GroupBookingsPage() {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchGroupBookings();
-    }
-  }, [isAuthenticated, statusFilter]);
+    fetchGroupBookings();
+  }, [statusFilter]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -83,11 +75,6 @@ export default function GroupBookingsPage() {
       default: return <Users className="h-4 w-4" />;
     }
   };
-
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   const statusOptions = [
     { value: 'all', label: 'All Group Bookings' },

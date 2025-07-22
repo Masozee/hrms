@@ -46,16 +46,8 @@ export default function TableManagement() {
   });
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchTables();
-    }
-  }, [isAuthenticated]);
+    fetchTables();
+  }, []);
 
   const fetchTables = async () => {
     setIsLoading(true);
@@ -329,10 +321,6 @@ export default function TableManagement() {
       default: return <Clock className="h-4 w-4" />;
     }
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

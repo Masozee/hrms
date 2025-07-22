@@ -12,27 +12,6 @@ export default function HospitalityServicesPage() {
   const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, isLoading, router]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated || !user) {
-    return null;
-  }
-
   const hospitalityModules = [
     {
       title: "Notifications",
@@ -84,23 +63,34 @@ export default function HospitalityServicesPage() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <User className="h-4 w-4" />
-                <span>Welcome, {user.first_name} {user.last_name}</span>
-                <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">
-                  {user.role || 'Staff'}
-                </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <NotificationBadge />
-                <Link 
-                  href="/dashboard"
+              {isAuthenticated && user ? (
+                <>
+                  <div className="flex items-center gap-2 text-sm text-gray-600">
+                    <User className="h-4 w-4" />
+                    <span>Welcome, {user.first_name} {user.last_name}</span>
+                    <span className="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">
+                      {user.role || 'Staff'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <NotificationBadge />
+                    <Link 
+                      href="/dashboard"
+                      className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+                    >
+                      Full Dashboard
+                    </Link>
+                    <LogoutButton />
+                  </div>
+                </>
+              ) : (
+                <Link
+                  href="/auth/signin"
                   className="text-sm text-purple-600 hover:text-purple-700 font-medium"
                 >
-                  Full Dashboard
+                  Login
                 </Link>
-                <LogoutButton />
-              </div>
+              )}
             </div>
           </div>
         </div>

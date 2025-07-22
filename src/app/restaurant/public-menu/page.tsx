@@ -78,7 +78,6 @@ export default function PublicMenu() {
     try {
       // Use the correct API endpoint with optional category filter
       const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1/';
-      const token = localStorage.getItem('api_token');
       
       let url = `${baseUrl}restaurant/menu-items/`;
       if (category && category !== 'all') {
@@ -97,11 +96,6 @@ export default function PublicMenu() {
       const headers: any = {
         'Content-Type': 'application/json',
       };
-      
-      // Only add authorization if token exists (for public menu access)
-      if (token) {
-        headers['Authorization'] = `Token ${token}`;
-      }
       
       const response = await fetch(url, { headers });
       
@@ -745,7 +739,7 @@ export default function PublicMenu() {
                     className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
                   >
                     Add to Cart
-                  </button>
+                  }
                 </div>
               </div>
             </div>

@@ -21,16 +21,8 @@ export default function GuestsPage() {
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
 
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/signin');
-    }
-  }, [isAuthenticated, authLoading, router]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetchGuests();
-    }
-  }, [isAuthenticated]);
+    fetchGuests();
+  }, []);
 
   const fetchGuests = async () => {
     setIsLoading(true);
@@ -96,10 +88,6 @@ export default function GuestsPage() {
     setShowForm(false);
     setEditingGuest(null);
   };
-
-  if (authLoading || !isAuthenticated) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
