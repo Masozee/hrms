@@ -10,10 +10,26 @@ import ReservationForm from '../../../components/reservations/reservation-form';
 import CalendarView from '../../../components/reservations/calendar-view';
 import { formatCurrency } from '../../../lib/currency';
 
+interface Reservation {
+  id: number;
+  guest_full_name: string;
+  room_number: string;
+  check_in_date: string;
+  check_out_date: string;
+  status: string;
+  payment_status: string;
+  total_amount: string | number;
+  adults: number;
+  children: number;
+  reservation_number: string;
+  special_requests: string;
+  [key: string]: any;
+}
+
 export default function ReservationsPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
-  const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
   const [statusFilter, setStatusFilter] = useState('all');
   const [viewMode, setViewMode] = useState<'table' | 'calendar'>('table');
   const [sortField, setSortField] = useState('check_in_date');

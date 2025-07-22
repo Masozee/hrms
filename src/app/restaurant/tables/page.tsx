@@ -18,10 +18,19 @@ import {
   Filter
 } from 'lucide-react';
 
+interface Table {
+  id: number;
+  number: string;
+  capacity: number;
+  location: string;
+  status: string;
+  description: string;
+}
+
 export default function TableManagement() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
-  const [tables, setTables] = useState([]);
+  const [tables, setTables] = useState<Table[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
   const [selectedTable, setSelectedTable] = useState<any>(null);

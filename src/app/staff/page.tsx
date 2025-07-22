@@ -7,11 +7,25 @@ import Link from "next/link";
 import { Plus, Search, Filter, Users, AlertCircle, UserCheck, Calendar } from "lucide-react";
 import { attendanceApi, staffApi } from '../../../lib/api';
 
+interface StaffMember {
+  id: number;
+  name: string;
+  department: string;
+  role: string;
+  status: string;
+  [key: string]: any;
+}
+
+interface AttendanceRecord {
+  id: number;
+  [key: string]: any;
+}
+
 export default function StaffPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
-  const [staff, setStaff] = useState([]);
-  const [attendanceData, setAttendanceData] = useState([]);
+  const [staff, setStaff] = useState<StaffMember[]>([]);
+  const [attendanceData, setAttendanceData] = useState<AttendanceRecord[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 

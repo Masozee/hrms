@@ -19,6 +19,16 @@ import {
 import { restaurantApi } from '../../../../lib/api';
 import { formatCurrency } from '../../../../lib/currency';
 
+interface MenuItem {
+  id: number;
+  name: string;
+  category: string;
+  price: string;
+  description: string;
+  preparation_time: number;
+  is_available: boolean;
+}
+
 interface CartItem {
   id: number;
   name: string;
@@ -35,7 +45,7 @@ interface CartItem {
 }
 
 export default function PublicMenu() {
-  const [menuItems, setMenuItems] = useState([]);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
@@ -80,7 +90,7 @@ export default function PublicMenu() {
           'salads': 'Salads',
           'beverages': 'Beverages'
         };
-        const categoryName = categoryNameMap[category] || category;
+        const categoryName = categoryNameMap[category as keyof typeof categoryNameMap] || category;
         url += `?category__name=${categoryName}`;
       }
       
