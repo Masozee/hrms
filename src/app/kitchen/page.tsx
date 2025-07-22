@@ -43,7 +43,7 @@ interface KitchenOrder {
   created_at: string;
   preparation_started_at?: string;
   estimated_completion?: string;
-  priority: 'normal' | 'high' | 'urgent';
+  priority: string;
   special_notes?: string;
 }
 

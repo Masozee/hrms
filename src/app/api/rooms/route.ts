@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
 
     const result = await db.insert(rooms).values(newRoom).returning();
     return NextResponse.json({ success: true, room: result[0] });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating room:', error);
     if (error.message?.includes('UNIQUE constraint failed')) {
       return NextResponse.json({ error: 'Room number already exists' }, { status: 400 });

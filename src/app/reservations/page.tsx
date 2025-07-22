@@ -38,7 +38,7 @@ export default function ReservationsPage() {
   const [itemsPerPage] = useState(20);
   const [selectedReservations, setSelectedReservations] = useState<number[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [editingReservation, setEditingReservation] = useState(null);
+  const [editingReservation, setEditingReservation] = useState<Reservation | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -360,7 +360,7 @@ export default function ReservationsPage() {
             </div>
           </div>
         ) : viewMode === 'calendar' ? (
-          <CalendarView reservations={reservations} />
+          <CalendarView reservations={reservations as any} />
         ) : (
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             {/* Bulk Actions */}

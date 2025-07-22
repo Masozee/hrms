@@ -27,7 +27,7 @@ export default function RestaurantDashboard() {
     menuItems: 0,
     todayRevenue: 0
   });
-  const [recentOrders, setRecentOrders] = useState([]);
+  const [recentOrders, setRecentOrders] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

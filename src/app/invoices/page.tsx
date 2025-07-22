@@ -11,7 +11,7 @@ import { billingApi, hotelApi } from '../../../lib/api';
 export default function InvoicesPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
-  const [invoices, setInvoices] = useState([]);
+  const [invoices, setInvoices] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
@@ -219,7 +219,7 @@ export default function InvoicesPage() {
                 <h2 className="text-2xl font-semibold">Invoice {invoiceData.invoiceNumber}</h2>
                 <div className="flex gap-2">
                   <button
-                    onClick={() => generateInvoice(invoiceData.reservation.id, 'pdf')}
+                    onClick={() => downloadPdf(invoiceData.id)}
                     disabled={isGeneratingPdf}
                     className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >

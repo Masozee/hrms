@@ -83,6 +83,23 @@ export async function GET(request: NextRequest) {
     if (!res.guest || !res.room) {
       return NextResponse.json({ error: 'Incomplete reservation data' }, { status: 400 });
     }
+
+    // Ensure guest has required non-null values
+    const guestData = {
+      firstName: res.guest.firstName,
+      lastName: res.guest.lastName,
+      email: res.guest.email,
+      phone: res.guest.phone || '', // Ensure phone is not null
+      address: res.guest.address || undefined,
+      city: res.guest.city || undefined,
+      country: res.guest.country || undefined
+    };
+
+    // Ensure room has required non-null values
+    const roomData = {
+      roomNumber: res.room.roomNumber,
+      roomType: res.room.roomType
+    };
     
     const checkIn = new Date(res.checkInDate);
     const checkOut = new Date(res.checkOutDate);
@@ -99,7 +116,13 @@ export async function GET(request: NextRequest) {
       invoiceNumber: `INV-${res.confirmationNumber}`,
       invoiceDate: new Date().toISOString(),
       dueDate: res.checkOutDate,
-      reservation: res,
+      reservation: {
+        confirmationNumber: res.confirmationNumber,
+        checkInDate: res.checkInDate,
+        checkOutDate: res.checkOutDate,
+        guest: guestData,
+        room: roomData
+      },
       charges: [
         {
           description: `Room ${res.room.roomNumber} (${res.room.roomType}) - ${nights} night${nights > 1 ? 's' : ''}`,
@@ -128,7 +151,7 @@ export async function GET(request: NextRequest) {
     };
 
     // Generate PDF using react-pdf
-    const pdfBuffer = await renderToBuffer(React.createElement(PDFInvoice, { invoiceData }));
+    const pdfBuffer = await renderToBuffer(React.createElement(PDFInvoice, { invoiceData }) as any);
 
     // Return PDF as response
     return new NextResponse(pdfBuffer, {

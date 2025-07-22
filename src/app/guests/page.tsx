@@ -15,7 +15,7 @@ export default function GuestsPage() {
   const router = useRouter();
   const [guests, setGuests] = useState<Guest[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [editingGuest, setEditingGuest] = useState(null);
+  const [editingGuest, setEditingGuest] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');

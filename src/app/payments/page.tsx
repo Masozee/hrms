@@ -11,8 +11,8 @@ import { billingApi, hotelApi } from '../../../lib/api';
 export default function PaymentsPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
-  const [payments, setPayments] = useState([]);
-  const [reservations, setReservations] = useState([]);
+  const [payments, setPayments] = useState<any[]>([]);
+  const [reservations, setReservations] = useState<any[]>([]);
   const [showPaymentForm, setShowPaymentForm] = useState(false);
   const [selectedReservation, setSelectedReservation] = useState('');
   const [isLoading, setIsLoading] = useState(false);

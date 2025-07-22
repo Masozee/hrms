@@ -10,7 +10,7 @@ import { Plus, Filter, Clock, CheckCircle, Play, Trash2 } from "lucide-react";
 export default function HousekeepingPage() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<any[]>([]);
   const [statusFilter, setStatusFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(false);
 

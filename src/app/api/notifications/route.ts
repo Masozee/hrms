@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     const today = new Date();
     const todayStr = today.toISOString().split('T')[0];
 
-    const notifications = [];
+    const notifications: any[] = [];
 
     // Today's Check-ins
     if (type === 'all' || type === 'checkins') {
@@ -186,7 +186,7 @@ export async function GET(request: NextRequest) {
           roomNumber: rooms.roomNumber,
           roomType: rooms.roomType,
           status: rooms.status,
-          notes: rooms.notes,
+          description: rooms.description,
           updatedAt: rooms.updatedAt
         })
         .from(rooms)
@@ -206,7 +206,7 @@ export async function GET(request: NextRequest) {
           message: `Room ${room.roomNumber} (${room.roomType}) - ${room.status}`,
           details: {
             status: room.status,
-            notes: room.notes,
+            notes: room.description,
             lastUpdated: room.updatedAt
           },
           timestamp: room.updatedAt,
@@ -274,8 +274,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Sort notifications by priority and timestamp
-    const priorityOrder = { urgent: 0, high: 1, medium: 2, low: 3 };
-    notifications.sort((a, b) => {
+    const priorityOrder: { [key: string]: number } = { urgent: 0, high: 1, medium: 2, low: 3 };
+    notifications.sort((a: any, b: any) => {
       const priorityDiff = priorityOrder[a.priority] - priorityOrder[b.priority];
       if (priorityDiff !== 0) return priorityDiff;
       return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();

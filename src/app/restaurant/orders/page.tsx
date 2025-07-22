@@ -27,8 +27,8 @@ import { formatCurrency } from '../../../../lib/currency';
 export default function OrderManagement() {
   const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
-  const [orders, setOrders] = useState([]);
-  const [menuItems, setMenuItems] = useState([]);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [menuItems, setMenuItems] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState<any>(null);
   const [showOrderModal, setShowOrderModal] = useState(false);
