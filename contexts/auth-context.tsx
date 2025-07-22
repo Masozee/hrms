@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { authApi, getAuthToken } from '../lib/api';
 
 interface User {
   id: number;
@@ -19,6 +20,7 @@ interface AuthContextType {
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   error: string | null;
+  token: string | null;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -36,36 +38,68 @@ interface AuthProviderProps {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const defaultUser: User = {
-    id: 1,
-    username: 'guest',
-    email: 'guest@hotel.com',
-    first_name: 'Guest',
-    last_name: 'User',
-    role: 'guest',
-    department: 'N/A'
-  };
-
-  const [user, setUser] = useState<User | null>(defaultUser);
-  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
-  const isAuthenticated = true;
+  // Check for existing token on mount
+  useEffect(() => {
+    const checkExistingAuth = async () => {
+      try {
+        const existingToken = getAuthToken();
+        if (existingToken) {
+          setToken(existingToken);
+          // Try to get user profile with existing token
+          const userProfile = await authApi.getProfile();
+          setUser(userProfile);
+        }
+      } catch (error) {
+        console.log('No valid existing authentication');
+        // Clear invalid token
+        if (getAuthToken()) {
+          await authApi.logout();
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkExistingAuth();
+  }, []);
+
+  const isAuthenticated = !!token && !!user;
 
   const login = async (username: string, password: string) => {
-    // Login is no longer necessary, but keeping the function signature
-    // to avoid breaking existing calls. It will effectively do nothing.
-    setUser(defaultUser);
-    setIsLoading(false);
+    setIsLoading(true);
     setError(null);
+    
+    try {
+      const response = await authApi.login(username, password);
+      setToken(response.token);
+      setUser(response.user);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Login failed';
+      setError(errorMessage);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const logout = async () => {
-    // Logout is no longer necessary, but keeping the function signature
-    // to avoid breaking existing calls. It will effectively do nothing.
-    setUser(null);
-    setIsLoading(false);
+    setIsLoading(true);
     setError(null);
+    
+    try {
+      await authApi.logout();
+    } catch (error) {
+      console.warn('Logout error:', error);
+    } finally {
+      setUser(null);
+      setToken(null);
+      setIsLoading(false);
+    }
   };
 
   const value: AuthContextType = {
@@ -75,6 +109,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     login,
     logout,
     error,
+    token,
   };
 
   return (
