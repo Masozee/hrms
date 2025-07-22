@@ -125,9 +125,9 @@ export default function Dashboard() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <User className="h-4 w-4" />
-              <span>Welcome, {user.first_name} {user.last_name}</span>
+              <span>Welcome, {user?.first_name} {user?.last_name}</span>
               <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                {user.role || 'Staff'}
+                {user?.role || 'Staff'}
               </span>
             </div>
             <div className="flex items-center gap-4">
@@ -284,7 +284,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex justify-between">
                   <span>User Role:</span>
-                  <span className="text-blue-600 font-medium">{user.role || 'Staff'}</span>
+                  <span className="text-blue-600 font-medium">{user?.role || 'Staff'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Session:</span>

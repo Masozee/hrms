@@ -739,7 +739,7 @@ export default function PublicMenu() {
                     className="flex-1 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
                   >
                     Add to Cart
-                  }
+                  </button>
                 </div>
               </div>
             </div>
