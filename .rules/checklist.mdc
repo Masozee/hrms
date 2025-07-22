@@ -1,0 +1,160 @@
+---
+description: checklist
+alwaysApply: false
+---
+# 🏨 Hotel Management App — Product Requirements Document (PRD)
+
+## 1. Project Overview
+
+**Goal:**  
+Develop an internal hotel property management system (PMS) for hotel staff to manage room bookings, check-ins/outs, guest information, housekeeping, billing, and reporting.
+
+**Users:**  
+- Front desk staff  
+- Housekeeping staff  
+- Hotel manager/admin  
+- Finance team
+
+**Objectives:**  
+- Improve operational efficiency
+- Reduce overbooking errors
+- Centralize guest data
+- Provide real-time room status updates
+- Generate business insights through reports
+
+---
+
+## 2. Features & Requirements
+
+### ✅ A. Reservation Management
+- [ ] Create, view, modify, and cancel reservations
+- [ ] Search reservations by guest name, date, room number
+- [ ] Calendar/timeline view of all bookings
+- [ ] Support group bookings (e.g., events)
+
+### ✅ B. Room Management
+- [ ] Add/edit room types and inventory
+- [ ] Update room status (available, occupied, dirty, maintenance)
+- [ ] Block rooms for maintenance
+- [ ] Configure seasonal rates and promotions
+
+### ✅ C. Guest Management
+- [ ] Guest profiles (contact info, ID, history)
+- [ ] Store special requests & notes
+- [ ] Check-in / check-out workflows
+- [ ] Optional ID verification
+
+### ✅ D. Billing & Payments
+- [ ] Generate invoices (room, services, taxes)
+- [ ] Record payments (cash, card, online)
+- [ ] Support split billing (room, minibar, etc.)
+- [ ] View payment status (paid, pending, refunded)
+
+### ✅ E. Housekeeping
+- [ ] Assign cleaning tasks to staff
+- [ ] Mark rooms as cleaned/inspected
+- [ ] Real-time updates for room status
+
+### ✅ F. Reporting & Analytics
+- [ ] Occupancy rate reports
+- [ ] Daily/monthly revenue reports
+- [ ] Metrics (ADR, RevPAR)
+- [ ] Export reports to PDF/Excel
+
+### ✅ G. Staff/Admin Management
+- [ ] Create/manage staff accounts
+- [ ] Role-based access control
+- [ ] Activity/audit logs
+- [ ] System configuration (taxes, fees, policies)
+
+### ✅ H. Integrations (Optional)
+- [ ] Channel manager (OTA sync)
+- [ ] Booking engine for hotel website
+- [ ] POS system for restaurants/spa
+
+### ✅ I. Mobile/Tablet Support
+- [ ] Responsive design for tablets
+- [ ] Housekeeping mobile module
+- [ ] Push notifications for urgent tasks
+
+---
+
+## 3. Non-Functional Requirements
+
+- [ ] Secure user authentication (RBAC)
+- [ ] Data encryption at rest & in transit
+- [ ] Reliable backups & recovery
+- [ ] GDPR/local privacy compliance
+- [ ] High availability & performance
+- [ ] Multi-language & multi-currency support
+
+---
+
+## 4. Success Metrics
+
+- 0% overbooking incidents
+- 50% faster check-in/check-out time
+- Accurate daily occupancy & revenue reports
+- 95% staff adoption within 3 months
+
+---
+
+# ✅ Hotel Management App — Development Checklist
+
+## 🗂️ Planning
+- [ ] Finalize requirements & user stories
+- [ ] Create wireframes for key screens
+- [ ] Define database schema
+- [ ] Choose tech stack (e.g., React/Vue + Node/Django + PostgreSQL)
+
+## ⚙️ Core Modules
+
+**Reservations**
+- [ ] Create/update/cancel bookings
+- [ ] Calendar view
+
+**Rooms**
+- [ ] CRUD for rooms
+- [ ] Room status updates
+
+**Guests**
+- [ ] CRUD for guest profiles
+- [ ] Check-in/out flow
+
+**Housekeeping**
+- [ ] Task assignment & status updates
+- [ ] Mobile/tablet UI for staff
+
+**Billing**
+- [ ] Invoice generation
+- [ ] Payment tracking
+
+**Reporting**
+- [ ] Occupancy/revenue reports
+- [ ] Export functionality
+
+**Admin**
+- [ ] Staff accounts & permissions
+- [ ] Audit trail
+
+## 🧪 Testing
+- [ ] Unit tests for all modules
+- [ ] End-to-end booking flow tests
+- [ ] Role-based access tests
+- [ ] Load testing for high booking volume
+
+## 📦 Deployment
+- [ ] Staging environment
+- [ ] Production environment with SSL
+- [ ] Backups enabled
+- [ ] Monitoring/logging in place
+
+## 🚀 Post-Launch
+- [ ] Staff training materials
+- [ ] User feedback loop
+- [ ] Regular updates & support plan
+
+---
+
+**Author:** [Your Name]  
+**Date:** [YYYY-MM-DD]  

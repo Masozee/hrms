@@ -1,0 +1,86 @@
+
+> hotelbooking@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.3.5 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.101:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Compiled middleware in 244ms
+ ✓ Ready in 1185ms
+ ○ Compiling /auth/signin ...
+ ✓ Compiled /auth/signin in 1404ms
+ GET /auth/signin 200 in 1583ms
+ ○ Compiling / ...
+ ✓ Compiled / in 672ms
+ GET / 200 in 753ms
+ GET /auth/signin 200 in 72ms
+ GET / 200 in 51ms
+ ○ Compiling /api-test ...
+ ✓ Compiled /api-test in 532ms
+ GET /api-test 200 in 567ms
+ ○ Compiling /_not-found/page ...
+ ✓ Compiled /_not-found/page in 516ms
+ POST /api/auth-test 404 in 552ms
+ GET / 200 in 218ms
+ GET /api-test 200 in 51ms
+ GET / 200 in 172ms
+ GET / 200 in 272ms
+ GET /api-test 200 in 93ms
+ GET /auth/signin 200 in 47ms
+ GET /auth/signin 200 in 176ms
+ GET / 200 in 70ms
+ ○ Compiling /reservations ...
+ ✓ Compiled /reservations in 1008ms
+ GET /reservations 200 in 1104ms
+ ✓ Compiled middleware in 21ms
+ ✓ Compiled middleware in 26ms
+ ✓ Compiled middleware in 9ms
+ ✓ Compiled middleware in 10ms
+ ✓ Compiled middleware in 5ms
+ ✓ Compiled middleware in 97ms
+ ✓ Compiled in 281ms
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/pro/Dev/hotelbooking/.next/server/app/page/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/pro/Dev/hotelbooking/.next/server/app/page/build-manifest.json'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 1120ms
+ GET / 500 in 1706ms
+   Reload env: .env.local
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/pro/Dev/hotelbooking/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/pro/Dev/hotelbooking/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/pro/Dev/hotelbooking/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/pro/Dev/hotelbooking/.next/server/pages/_app/build-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open '/Users/pro/Dev/hotelbooking/.next/server/app/page/app-build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/pro/Dev/hotelbooking/.next/server/app/page/app-build-manifest.json'
+}
+ ⨯ [Error: ENOENT: no such file or directory, open '/Users/pro/Dev/hotelbooking/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/pro/Dev/hotelbooking/.next/server/pages/_app/build-manifest.json'
+}
+[Error: ENOENT: no such file or directory, open '/Users/pro/Dev/hotelbooking/.next/server/pages/_app/build-manifest.json'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/pro/Dev/hotelbooking/.next/server/pages/_app/build-manifest.json'
+}
+ GET /api/admin/program 404 in 603ms
+[?25h
